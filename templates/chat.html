@@ -1,0 +1,36 @@
+<!-- chatbot/templates/chatbot/chat.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>채팅</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault();
+                var message = $('input[type="text"]').val();
+                $.ajax({
+                    url: 'chat',
+                    method: 'GET',
+                    data: { message: message },
+                    dataType: 'json',
+                    success: function(response) {
+                        $('input[type="text"]').val('');
+                        $('#chatbox').append('<p>' + message + '</p>');
+                        $('#chatbox').append('<p>' + response.message + '</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="chatbox"></div>
+    <form>
+        {% csrf_token %}
+        <input type="text" name="message">
+        <button type="submit">보내기</button>
+    </form>
+</body>
+</html>
