@@ -18,7 +18,8 @@
                     success: function(response) {
                         $('input[type="text"]').val('');
                         $('#chatbox').append('<p>' + message + '</p>');
-                        $('#chatbox').append('<p>' + response.message + '</p>');
+                        console.log(response);
+                        $('#chatbox').append('<p>' + response.response + '</p>');
                     }
                 });
             });
