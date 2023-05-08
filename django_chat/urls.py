@@ -20,4 +20,6 @@ from chat import views
 urlpatterns = [
     path('', views.index, name='home'),
     path('chat', views.chatbot_response, name='chat'),
+    path('go_chat', views.go_chat),
+    path('go_image', views.go_image),
 ]

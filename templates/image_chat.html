@@ -3,26 +3,24 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>채팅</title>
+    <title>이미지</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
             $('form').submit(function(event) {
                 event.preventDefault();
-                var message = $('#chat').val();
                 var image = $('#image').val();
-                console.log(message);
                 console.log(image);
                 $.ajax({
                     url: 'chat',
                     method: 'GET',
-                    data: { message: message },
+                    data: { image: image },
                     dataType: 'json',
                     success: function(response) {
                         $('input[type="text"]').val('');
-                        $('#chatbox').append('<p>' + message + '</p>');
+                        $('#chatbox').append('<p>' + image + '</p>');
                         console.log(response);
-                        $('#chatbox').append('<p>' + response.response + '</p>');
+                        $('#chatbox').append('<img src="' + response.response + '"</img>');
                     }
                  });
             });
@@ -33,10 +31,8 @@
     <div id="chatbox"></div>
     <form>
         {% csrf_token %}
-        <label>chat</label>
-        <input type="text" name="message" id="chat">
         <label>image</label>
-        <input type="text" name="message" id="image">
+        <input type="text" name="image" id="image">
         <button type="submit">보내기</button>
     </form>
 </body>
